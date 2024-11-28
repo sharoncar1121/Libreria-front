@@ -14,5 +14,7 @@ export const ContextAlqu = createContext({
     espera: [] as Espera[],
     setEspera: (espera: Espera[]) => { },
     setLibroEspera: (id: number) => { },
+    cargo: 0,
+    setCargo: (cargo:number)=> {}  
     
 })

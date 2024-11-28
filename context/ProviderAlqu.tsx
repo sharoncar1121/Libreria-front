@@ -11,6 +11,7 @@ export default function ProviderAlqu({children}: VistaComponente) {
     const [libros, setLibros] = useState<Libros[]>([]);
     const [alquiler, setAlquiler] = useState<Alquiler[]>([]);
     const [espera, setEspera] = useState<Espera[]>([]);
+    const [cargo, setCargo] = useState(0);
 
     
     function setLibroAlqu(id:number) {
@@ -26,7 +27,7 @@ export default function ProviderAlqu({children}: VistaComponente) {
 
 
   return (
-   <ContextAlqu.Provider value={{libros, setLibros, alquiler, setAlquiler, espera, setEspera, setLibroAlqu, setLibroEspera, eliminarAlquiler }}>
+   <ContextAlqu.Provider value={{libros, setLibros, alquiler, setAlquiler, espera, setEspera, setLibroAlqu, setLibroEspera, eliminarAlquiler, setCargo, cargo }}>
 
     {children}
 
