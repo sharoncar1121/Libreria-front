@@ -7,13 +7,13 @@ import React, { createContext } from 'react'
 export const ContextAlqu = createContext({
     libros: [] as Libros[],
     setLibros: (libro: Libros[]) => { },
-    setLibroAlqu: (id: number) => { },
+    setLibroAlqu: (id: number, estado: number) => { },
     alquiler: [] as Alquiler[],
     setAlquiler: (alquiler: Alquiler[]) => { },
-    eliminarAlquiler: (id: number) => { },
+    setLibroDisp: (id: number) => { },
     espera: [] as Espera[],
     setEspera: (espera: Espera[]) => { },
-    setLibroEspera: (id: number) => { },
+    setLibroEspera: (id: number, espera:boolean) => { },
     cargo: 0,
     setCargo: (cargo:number)=> {}  
     
