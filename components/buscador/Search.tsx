@@ -5,3 +5,5 @@ export default function Search() {
     <div>Buscador</div>
   )
 }
+//evento onpress
+//invocar servicio (api) en backend
