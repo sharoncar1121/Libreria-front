@@ -4,6 +4,7 @@ export interface Libros {
     Id_libro:              number;
     Estado:                number;
     Imagen:                string;
+    Nombre_libro:          string;
     ISBN:                  string;
     Descripcion:           string;
     Genero:                string;
