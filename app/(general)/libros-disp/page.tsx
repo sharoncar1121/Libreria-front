@@ -1,7 +1,11 @@
+'use client'
+import Cards from '@/components/cards/Cards'
 import React from 'react'
 
 export default function page() {
   return (
-    <div>pagina que muestra unicamente los libros en estado disponible</div>
+    <div>
+      <Cards filtroEstado='disponible'/>
+    </div>
   )
 }
