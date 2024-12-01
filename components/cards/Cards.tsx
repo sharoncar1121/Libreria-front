@@ -41,15 +41,30 @@ export default function Cards({filtroEstado = 'todos'}: CardsProps) {
                 {librosFiltrados.map((libro) => (
                     <div key={libro.Id_libro} className="col-md-3 mb-3 d-flex">
                         <div className="card h-100 d-flex flex-column">
+                          <div
+                          className='image-container'
+                          style={{height: '200px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            backgroundColor: '#f8f9fa',
+                          }}
+                          >
                             <img 
                                 src={libro.Imagen} 
-                                className="card-img-top" 
                                 alt={libro.Autor} 
+                                style={{
+                                  maxHeight: '100%',
+                                  maxWidth: '100%',
+                                  objectFit: 'contain',
+                                }}
                             />
+                            </div>
+                            
                             <div className="card-body d-flex flex-column">
                                 <h5 className="card-title">{libro.Nombre_libro}</h5>
                                 <p className="card-text">{libro.ISBN}</p>
-                                <p className="card-text">{libro.Descripcion}</p>
+                                <p className="card-text text-truncate" style={{ minHeight: '60px'}}>{libro.Descripcion}</p>
                                 <p
                                 className={`badge ${
                                   libro.Estado === 1 ? 'bg-success' : 'bg-danger'
