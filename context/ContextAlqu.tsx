@@ -13,7 +13,7 @@ export const ContextAlqu = createContext({
     setLibroDisp: (id: number) => { },
     espera: [] as Espera[],
     setEspera: (espera: Espera[]) => { },
-    setLibroEspera: (id: number, espera:boolean) => { },
+    setLibroEspera: (id: number) => { },
     cargo: 0,
     setCargo: (cargo:number)=> {}  
     

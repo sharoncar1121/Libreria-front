@@ -2,7 +2,7 @@
 import { Libros, Alquiler, Espera } from '@/models/libros'; 
 import React, { ReactNode, useContext, useState } from 'react'
 import { ContextAlqu } from './ContextAlqu';
-import { getLibros, updateEstado } from '@/services/services';
+import { getLibros, updateEspera, updateEstado } from '@/services/services';
 
 interface VistaComponente{
     children: ReactNode
@@ -34,18 +34,14 @@ export default function ProviderAlqu({children}: VistaComponente) {
         console.log('función para cambiar el libro a estado alquilado a disponible con id:', id);
     }
 
-   async function setLibroEspera(id:number, reservado: boolean) {
+   async function setLibroEspera(id:number) {
+    const espera = true
         try {
             console.log('Cambiando el campo espera:', id);
-            
-            const libroActualizado = { reservado };
-            await updateEstado(id, libroActualizado);
+            await updateEspera(id, espera);
 
-            setLibros((prevLibros) =>
-                prevLibros.map((libro) =>
-                    libro.Id_libro === id ? { ...libro, reservado } : libro
-                )
-            );
+            const librosData = await getLibros();
+            setLibros(librosData); 
 
             console.log('El libro está en espera');
         } catch (error) {

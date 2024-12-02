@@ -21,4 +21,17 @@ export const updateEstado = async (id:number, estado: number) => {
     }
 };
 
+export const updateEspera = async (id:number, espera: boolean) => {
+    try {
+        console.log("Enviando ID:", id);
+        const response = await axios.put(`http://localhost:5000/libro-espera/${id}`, {espera});
+        return response.data; 
+    } catch (error) {
+        console.log("Enviando ID:", id);
+        console.log("Enviando estado:", espera);
+        console.error("Error en la solicitud Axios:", error);
+        throw error; 
+    }
+};
+
 
