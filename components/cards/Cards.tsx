@@ -74,7 +74,7 @@ export default function Cards({filtroEstado = 'todos'}: CardsProps) {
                                 >
                                   {libro.Estado === 1 ? 'Disponible' : 'Alquilado'}
                                 </p>
-                                <div className="mt-auto">
+                                <div className="mt-auto d-flex justify-content-center">
                                 {libro.Estado === 1 &&  <BtnAlquilar libroAlq = {libro}/>}
                                 {libro.Estado === 2 &&  <BtnReservar libroAlq= {libro}/>}
                             </div>
