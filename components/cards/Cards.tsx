@@ -12,6 +12,8 @@ interface CardsProps {
 export default function Cards({filtroEstado = 'todos'}: CardsProps) {
   const {libros, setLibros}= useContextAlq();
   const [librosFiltrados, setLibrosFiltrados] = useState(libros);
+  const [mensaje, setMensajes] = useState<Record<number, string | null>>({});
+
 
   useEffect(()=>{
     obtenerLibros();
@@ -36,6 +38,13 @@ export default function Cards({filtroEstado = 'todos'}: CardsProps) {
       console.error("Error al obtener los libros:", error);
     }
   };
+
+ const mostrarMensaje = (idLibro: number, mensaje: string) => {
+  setMensajes((prev) => ({ ...prev, [idLibro]: mensaje}));
+  setTimeout(() =>{
+    setMensajes((prev) =>({ ...prev, [idLibro]: null}));
+  }, 10000);
+ };
 
   return (
     <div className="container">
@@ -74,8 +83,16 @@ export default function Cards({filtroEstado = 'todos'}: CardsProps) {
                                 >
                                   {libro.Estado === 1 ? 'Disponible' : 'Alquilado'}
                                 </p>
-                                <div className="mt-auto d-flex justify-content-center">
-                                {libro.Estado === 1 &&  <BtnAlquilar libroAlq = {libro}/>}
+                                <div className="mt-auto d-flex flex-column align-items-center">
+                                {mensaje[libro.Id_libro] && (
+                                  <div className="position-absolute top-0 start-50 translate-middle-x bg-green-100 text-green-800 px-3 py-2 rounded shadow text-center">
+                                    {mensaje[libro.Id_libro]}
+                                    </div>
+                                )}
+                                {libro.Estado === 1 && ( <BtnAlquilar libroAlq = {libro} 
+                                mostrarMensaje={(mensaje) => mostrarMensaje(libro.Id_libro, mensaje)}
+                                />
+                                )}
                                 {libro.Estado === 2 &&  <BtnReservar libroEsp= {libro}/>}
                             </div>
                         </div>
