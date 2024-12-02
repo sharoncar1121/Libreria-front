@@ -76,7 +76,7 @@ export default function Cards({filtroEstado = 'todos'}: CardsProps) {
                                 </p>
                                 <div className="mt-auto d-flex justify-content-center">
                                 {libro.Estado === 1 &&  <BtnAlquilar libroAlq = {libro}/>}
-                                {libro.Estado === 2 &&  <BtnReservar libroAlq= {libro}/>}
+                                {libro.Estado === 2 &&  <BtnReservar libroEsp= {libro}/>}
                             </div>
                         </div>
                     </div>
