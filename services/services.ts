@@ -34,4 +34,15 @@ export const updateEspera = async (id:number, espera: boolean) => {
     }
 };
 
+export const createEspera = async (data: { Fecha_espera: string; Id_libro: number }) => {
+    try {
+        console.log("Enviando datos de espera:", data);
+        const response = await axios.post('http://localhost:5000/espera-post', data);
+        return response.data;
+    } catch (error) {
+        console.error("Error en la solicitud Axios al crear espera:", error);
+        throw error;
+    }
+};
+
 
