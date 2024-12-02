@@ -45,4 +45,14 @@ export const createEspera = async (data: { Fecha_espera: string; Id_libro: numbe
     }
 };
 
+export const createAlquieler = async (data: { Fecha_alquiler: string; Id_libro: number, Fecha_entrega:string, Cargo: number }) => {
+    try {
+        console.log("Enviando datos de alquiler:", data);
+        const response = await axios.post('http://localhost:5000/alquiler-post', data);
+        return response.data;
+    } catch (error) {
+        console.error("Error en la solicitud Axios al crear alquiler:", error);
+        throw error;
+    }
+};
 

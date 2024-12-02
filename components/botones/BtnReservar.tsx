@@ -25,7 +25,7 @@ export default function BtnReservar({libroEsp}: BtnEsperarProps) {
     const IdLibro = Number(Id_libro)
     try {
         const nuevaEspera = {
-            Fecha_espera: new Date().toISOString().split("T")[0], // Fecha actual en formato YYYY-MM-DD
+            Fecha_espera: new Date().toISOString().split("T")[0], 
             Id_libro: IdLibro,
         };
 
