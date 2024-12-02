@@ -15,8 +15,6 @@ export default function BtnReservar({libroEsp}: BtnEsperarProps) {
   const handleEsperar = () => {
     setLibroEspera( libroEsp.Id_libro); 
     setMensaje(`¡Has puesto en espera "${libroEsp.Nombre_libro}" con éxito, se te notificará al estar disponible para que puedas alquilarlo!`);
-    setLibroEspera( libroEsp.Id_libro); 
-    setMensaje(`¡Has pues en espera "${libroEsp.Nombre_libro}" con éxito, se te notificará al estar disponible para que puedas alquilarlo!`);
     setTimeout(() => setMensaje(null), 5000);
   };
 
