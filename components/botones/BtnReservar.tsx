@@ -10,8 +10,13 @@ export default function BtnReservar(libroAlq: Libros) {
   const [mensaje, setMensaje] = useState<string | null>(null);
 
   const handleEsperar = () => {
+<<<<<<< Updated upstream
     setLibroEspera( libroAlq.Id_libro, true); 
     setMensaje(`¡Has puesto en espera "${libroAlq.Nombre_libro}" con éxito, se te notificará al estar disponible para que puedas alquilarlo!`);
+=======
+    setLibroEspera( libroAlq.Id_libro); 
+    setMensaje(`¡Has pues en espera "${libroAlq.Nombre_libro}" con éxito, se te notificará al estar disponible para que puedas alquilarlo!`);
+>>>>>>> Stashed changes
     setTimeout(() => setMensaje(null), 5000);
   };
 
