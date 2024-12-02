@@ -3,15 +3,18 @@ import React, { useState } from 'react';
 import { useContextAlq } from '@/context/ProviderAlqu';
 import { Libros } from '@/models/libros';
 
+interface BtnAlquilarProps {
+  libroAlq: Libros;
+}
 
 
-export default function BtnAlquilar( libroAlq: Libros) {
+export default function BtnAlquilar( { libroAlq }: BtnAlquilarProps) {
   const { setLibroAlqu } = useContextAlq(); 
   const [mensaje, setMensaje] = useState<string | null>(null);
 
 
   const handleAlquilar = () => {
-    setLibroAlqu( libroAlq.Id_libro, 2); 
+    setLibroAlqu( libroAlq.Id_libro); 
     setMensaje(`¡Has alquilado el libro "${libroAlq.Nombre_libro}", con ISBN:  "${libroAlq.ISBN}" con éxito!`);
     setTimeout(() => setMensaje(null), 5000);
   };

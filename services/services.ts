@@ -7,12 +7,16 @@ export const getLibros= async() =>{
     return response.data
 }
 
-export const updateEstado = async (id:number, libroData: any) => {
+export const updateEstado = async (id:number, estado: number) => {
     try {
-        const response = await axios.put(`http://localhost:5000/libro/${id}`, libroData);
+        console.log("Enviando ID:", id);
+        console.log("Enviando estado:", estado);
+        const response = await axios.put(`http://localhost:5000/libro/${id}`, {estado});
         return response.data; 
     } catch (error) {
-        console.error("Error al actualizar el libro:", error);
+        console.log("Enviando ID:", id);
+        console.log("Enviando estado:", estado);
+        console.error("Error en la solicitud Axios:", error);
         throw error; 
     }
 };

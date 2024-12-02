@@ -2,6 +2,7 @@
 import { useContextAlq } from '@/context/ProviderAlqu'
 import { getLibros } from '@/services/services'
 import React, { useEffect, useState } from 'react'
+import BtnAlquilar from '../botones/BtnAlquilar';
 
 interface CardsProps {
   filtroEstado?: 'disponible' | 'alquilado' | 'todos';
@@ -72,6 +73,7 @@ export default function Cards({filtroEstado = 'todos'}: CardsProps) {
                                 >
                                   {libro.Estado === 1 ? 'Disponible' : 'Alquilado'}
                                 </p>
+                                <BtnAlquilar libroAlq = {libro}/>
                                 <div className="mt-auto">
                             </div>
                         </div>
