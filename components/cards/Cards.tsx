@@ -86,10 +86,10 @@ export default function Cards({filtroEstado = 'todos'}: CardsProps) {
 
                                 <p
                                 className={`badge ${
-                                  libro.Espera === true ? 'bg-success' : ''
+                                  libro.Espera === true && libro.Estado=== 2 ? 'bg-success' : ''
                                 }`}
                                 >
-                                  {libro.Espera === true ? 'En espera' : ''}
+                                  {libro.Espera === true && libro.Estado=== 2 ? 'En espera' : ''}
                                 </p>
                                 
                                 <div className="mt-auto d-flex flex-column align-items-center">
