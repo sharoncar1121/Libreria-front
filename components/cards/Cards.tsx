@@ -83,6 +83,15 @@ export default function Cards({filtroEstado = 'todos'}: CardsProps) {
                                 >
                                   {libro.Estado === 1 ? 'Disponible' : 'Alquilado'}
                                 </p>
+
+                                <p
+                                className={`badge ${
+                                  libro.Espera === true ? 'bg-success' : ''
+                                }`}
+                                >
+                                  {libro.Espera === true ? 'En espera' : ''}
+                                </p>
+                                
                                 <div className="mt-auto d-flex flex-column align-items-center">
                                 {mensaje[libro.Id_libro] && (
                                   <div className="position-absolute top-0 start-50 translate-middle-x bg-green-100 text-green-800 px-3 py-2 rounded shadow text-center">
