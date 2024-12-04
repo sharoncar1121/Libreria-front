@@ -6,8 +6,8 @@ import { createEspera } from '@/services/services';
 
 interface BtnEsperarProps {
   libroEsp: Libros;
+  
 }
-
 
 export default function BtnReservar({libroEsp}: BtnEsperarProps) {
   const { setLibroEspera } = useContextAlq(); 
@@ -17,7 +17,7 @@ export default function BtnReservar({libroEsp}: BtnEsperarProps) {
     setLibroEspera( libroEsp.Id_libro); 
     agregarEspera(libroEsp.Id_libro)
     setMensaje(`¡Has puesto en espera "${libroEsp.Nombre_libro}" con éxito, se te notificará al estar disponible para que puedas alquilarlo!`);
-    setTimeout(() => setMensaje(null), 5000);
+    setTimeout(() => setMensaje(null), 7000);
   };
 
 

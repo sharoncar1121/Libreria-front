@@ -7,6 +7,7 @@ import { createAlquiler } from '@/services/services';
 interface BtnAlquilarProps {
   libroAlq: Libros;
   mostrarMensaje: (mensaje: string) => void;
+  onAlquilar: () => void;
 }
 
 

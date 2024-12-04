@@ -13,6 +13,7 @@ export default function Cards({filtroEstado = 'todos'}: CardsProps) {
   const {libros, setLibros}= useContextAlq();
   const [librosFiltrados, setLibrosFiltrados] = useState(libros);
   const [mensaje, setMensajes] = useState<Record<number, string | null>>({});
+  const [enEspera, setEnEspera] = useState<number[]>([]);
 
 
   useEffect(()=>{
@@ -45,6 +46,12 @@ export default function Cards({filtroEstado = 'todos'}: CardsProps) {
     setMensajes((prev) =>({ ...prev, [idLibro]: null}));
   }, 10000);
  };
+
+ const agregarEnEspera = (idLibro: number) => {
+  if (!enEspera.includes(idLibro)) {
+    setEnEspera((prev) => [...prev, idLibro]);
+  }
+};
 
   return (
     <div className="container">
@@ -84,6 +91,7 @@ export default function Cards({filtroEstado = 'todos'}: CardsProps) {
                                   {libro.Estado === 1 ? 'Disponible' : 'Alquilado'}
                                 </p>
 
+
                                 <p
                                 className={`badge ${
                                   libro.Espera === true && libro.Estado=== 2 ? 'bg-success' : ''
@@ -91,7 +99,8 @@ export default function Cards({filtroEstado = 'todos'}: CardsProps) {
                                 >
                                   {libro.Espera === true && libro.Estado=== 2 ? 'En espera' : ''}
                                 </p>
-                                
+
+
                                 <div className="mt-auto d-flex flex-column align-items-center">
                                 {mensaje[libro.Id_libro] && (
                                   <div className="position-absolute top-0 start-50 translate-middle-x bg-green-100 text-green-800 px-3 py-2 rounded shadow text-center">
@@ -100,6 +109,7 @@ export default function Cards({filtroEstado = 'todos'}: CardsProps) {
                                 )}
                                 {libro.Estado === 1 && ( <BtnAlquilar libroAlq = {libro} 
                                 mostrarMensaje={(mensaje) => mostrarMensaje(libro.Id_libro, mensaje)}
+                                onAlquilar={() => agregarEnEspera(libro.Id_libro)}
                                 />
                                 )}
                                 {libro.Estado === 2 &&  <BtnReservar libroEsp= {libro}/>}

@@ -3,6 +3,7 @@ import { useContextAlq } from '@/context/ProviderAlqu';
 import { getEsperaList, getLibros } from '@/services/services';
 import React, { useEffect } from 'react'
 
+
 export default function InfoUser() {
     const {alquiler, espera, setEspera, libros, setLibros}= useContextAlq();
 
@@ -36,25 +37,52 @@ export default function InfoUser() {
 
     
   return (
-    <div>
-             <p>Cantidad de libros alquilados: {alquiler.length}</p>
-             <p>Cantidad de libros en espera: {espera.length}</p>
+    <div className="container mt-5 p-4 bg-white rounded shadow-lg border">
+      <div className="text-center mb-4">
+      <h2 className="text-primary">Gestión de Libros</h2>
+      <p className="text-muted">Resumen de libros alquilados y en espera</p>
+      </div>
+      
+        <div className="mb-4">
+        <p className="fs-5 text-secondary">
+        <i className="bi bi-book-half text-primary"></i> <strong>Cantidad de libros alquilados:</strong>
+        <span>{alquiler.length > 0 ? alquiler.length : 0}</span>
+              </p>
+              <p className="fs-5 text-secondary">
+              <i className="bi bi-clock text-warning"></i> <strong>Cantidad de libros en espera:</strong> 
+              <span>{espera.length > 0 ? espera.length : 0}</span>
+              </p>
+              </div>
 
-
-            <h3>Libros en espera:</h3>
-            <ul>
+              <div className="mb-4">
+            <h3 className="text-success">📚Libros en espera:</h3>
+            {librosEnEspera.length > 0 ? (
+        <ul className="list-group list-group-flush">
                 {librosEnEspera.map((libro, index) => (
-                    <li key={index}>{libro}</li>
+                    <li key={index} className="list-group-item">
+                    <i className="bi bi-check-circle text-success"></i>{libro}
+                      </li>
                 ))}
             </ul>
+            ) : (
+              <p className="text-muted">No hay libros en espera.</p>
+            )}
+            </div>
 
-            <h3>Libros alquilados:</h3>
-            <ul>
+            <div>
+            <h3 className="text-success">📖 Libros alquilados:</h3>
+            {librosAlquilados.length > 0 ? (
+          <ul className="list-group list-group-flush">
                 {librosAlquilados.map((libro, index) => (
-                    <li key={index}>{libro}</li>
+                    <li key={index} className="list-group-item">
+                     <i className="bi bi-check-circle text-success"></i>{libro}
+                      </li>
                 ))}
             </ul>
-
-    </div>
+            ) : (
+              <p className="text-muted">No hay libros alquilados.</p>
+            )}
+            </div>
+        </div>
   )
 }

@@ -51,6 +51,13 @@ export default function Cargo() {
     };
     
   return (
-    <div>el total del cargo es: {cargo}</div>
+    <div className="text-center mt-4">
+    <div className="alert alert-info d-inline-block p-3" role="alert">
+      <h5 className="mb-2">
+        <i className="bi bi-cash-coin"></i> Total del Cargo
+      </h5>
+      <p className="fw-bold fs-5 text-primary">L{cargo}</p>
+      </div>
+      </div>
   )
 }
