@@ -14,7 +14,6 @@ export interface Libros {
     Fecha_entrega:         Date;
 }
 
-
 export interface Alquiler {
     Id_alquiler:              number;
     Fecha_alquiler:           Date;
