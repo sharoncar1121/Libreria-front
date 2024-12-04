@@ -30,10 +30,10 @@ export default function InfoUser() {
         }
       };
 
-      const librosEnEspera = libros.filter(libro => libro.Espera === true).map(libro => libro.Nombre_libro);
-
-
-      const librosAlquilados = libros.filter(libro => libro.Estado === 2).map(libro => libro.Nombre_libro);
+       
+        const librosEnEspera = libros.filter((libro) => libro.Espera === true).map((libro) => libro.Nombre_libro);
+        const librosAlquilados = libros.filter((libro) => libro.Estado === 2).map((libro) => libro.Nombre_libro);
+      
 
     
   return (
@@ -45,12 +45,12 @@ export default function InfoUser() {
       
         <div className="mb-4">
         <p className="fs-5 text-secondary">
-        <i className="bi bi-book-half text-primary"></i> <strong>Cantidad de libros alquilados:</strong>
-        <span>{alquiler.length > 0 ? alquiler.length : 0}</span>
+        <i className="bi bi-book-half text-primary"></i> <strong>Cantidad de libros alquilados:</strong>{''}
+        <span>{librosAlquilados.length > 0 ? librosAlquilados : 0}</span>
               </p>
               <p className="fs-5 text-secondary">
-              <i className="bi bi-clock text-warning"></i> <strong>Cantidad de libros en espera:</strong> 
-              <span>{espera.length > 0 ? espera.length : 0}</span>
+              <i className="bi bi-clock text-warning"></i> <strong>Cantidad de libros en espera:</strong>{''}
+              <span>{librosEnEspera.length > 0 ? librosEnEspera : 0}</span>
               </p>
               </div>
 
@@ -86,3 +86,12 @@ export default function InfoUser() {
         </div>
   )
 }
+
+
+
+
+
+
+
+
+

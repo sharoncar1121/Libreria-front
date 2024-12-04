@@ -81,7 +81,7 @@ export default function Cards({filtroEstado = 'todos'}: CardsProps) {
                             
                             <div className="card-body d-flex flex-column">
                                 <h5 className="card-title">{libro.Nombre_libro}</h5>
-                                <p className="card-text">{libro.ISBN}</p>
+                                <p className="card-text">ISBN : {libro.ISBN}</p>
                                 <p className="card-text text-truncate" style={{ minHeight: '60px'}}>{libro.Descripcion}</p>
                                 <p
                                 className={`badge ${
