@@ -21,6 +21,7 @@ export interface Alquiler {
     Fecha_entrega:            Date;
     Cargo:                    number;
     Id_libro:                 number;
+    Fecha_entrego:            Date;
 }
 
 export interface Espera {
