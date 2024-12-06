@@ -31,11 +31,13 @@ export default function InfoUser() {
       };
 
        
-        const librosEnEspera = libros.filter((libro) => libro.Espera === true).map((libro) => libro.Nombre_libro);
-        const librosAlquilados = libros.filter((libro) => libro.Estado === 2).map((libro) => libro.Nombre_libro);
-      
+      const librosEnEspera = libros
+      .filter((libro) => libro.Espera === true)
+      .map((libro) => libro.Nombre_libro);
 
-    
+      const librosAlquilados = libros.filter((libro) => libro.Estado === 2);
+
+      
   return (
     <div className="container mt-5 p-4 bg-white rounded shadow-lg border">
       <div className="text-center mb-4">
@@ -75,7 +77,18 @@ export default function InfoUser() {
           <ul className="list-group list-group-flush">
                 {librosAlquilados.map((libro, index) => (
                     <li key={index} className="list-group-item">
-                     <i className="bi bi-check-circle text-success"></i>{libro}
+                     <i className="bi bi-check-circle text-success"></i> {libro.Nombre_libro}
+                     <div className="mt-2">
+                      <small className="text-muted">
+                      <strong>Fecha de alquiler:</strong>{''}
+                      {new Date(libro.Fecha_modifica_estado).toLocaleDateString()}
+                      </small>
+                      <br/>
+                      <small className='text-muted'>
+                      <strong>Fecha de entrega:</strong>{''}
+                      {new Date(libro.Fecha_entrega).toLocaleDateString()}
+                      </small>
+                     </div>
                       </li>
                 ))}
             </ul>
