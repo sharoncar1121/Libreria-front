@@ -57,8 +57,13 @@ export const createAlquiler = async (data: { Fecha_alquiler: string; Id_libro: n
 };
 
 export const getAlquiler= async() =>{
-    const response = await axios.get('http://localhost:5000/alquiler')
-    return response.data
+    try {
+        const response = await axios.get('http://localhost:5000/alquiler')
+        return response.data
+    } catch (error) {
+        console.error('Error al obtner los libros alquilados:', error);
+        throw error;
+    }
 }
 
 export const getEsperaList= async() =>{

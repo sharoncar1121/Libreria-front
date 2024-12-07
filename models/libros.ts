@@ -16,11 +16,11 @@ export interface Libros {
 
 export interface Alquiler {
     Id_alquiler:              number;
-    Fecha_alquiler:           Date;
-    Fecha_entrega:            Date;
+    Fecha_alquiler:           string;
+    Fecha_entrega:            string;
     Cargo:                    number;
     Id_libro:                 number;
-    Fecha_entrego:            Date;
+    Fecha_entrego:            string;
 }
 
 export interface Espera {

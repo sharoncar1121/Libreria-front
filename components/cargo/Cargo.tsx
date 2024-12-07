@@ -31,7 +31,10 @@ export default function Cargo() {
             const fechaEntrega = dayjs(item.Fecha_entrega);
             const fechaEntrego = dayjs(item.Fecha_entrego);
     
-            if (!fechaEntrego.isValid() || !fechaEntrega.isValid()) return;
+            if (!fechaEntrego.isValid() || !fechaEntrega.isValid()) {
+              console.warn('Fecha inválida en el registro:', item);
+              return;
+          }
     
             const diferenciaDias = fechaEntrego.diff(fechaEntrega, 'day');
             let cargo = 0;

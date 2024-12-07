@@ -1,11 +1,15 @@
 'use client'
 import { useContextAlq } from '@/context/ProviderAlqu';
-import { getEsperaList, getLibros } from '@/services/services';
-import React, { useEffect } from 'react'
+import { getAlquiler, getEsperaList, getLibros } from '@/services/services';
+import React, { useEffect, useState } from 'react'
+import dayjs from 'dayjs';
 
 
 export default function InfoUser() {
-    const {alquiler, espera, setEspera, libros, setLibros}= useContextAlq();
+    const {libros, setLibros} = useContextAlq();
+    const {alquiler, setAlquiler} = useContextAlq();
+    const {espera, setEspera} = useContextAlq();
+    
 
     useEffect(()=>{
         obtenerEsperaList()
@@ -30,12 +34,45 @@ export default function InfoUser() {
         }
       };
 
-       
+      const obtenerAlquiler = async () => {
+        try {
+          const alquileresData = await getAlquiler();
+          setAlquiler(alquileresData);
+        } catch (error) {
+          console.error('Error al obtener libors alquilados:', error);
+        }
+      };
+
+      const librosAlquilados = libros.filter((libro) => libro.Estado === 2);
+      const librosConFechas = librosAlquilados.map((libro) => {
+      const registroAlquiler = alquiler.find((alquiler) => alquiler.Id_libro === libro.Id_libro);
+      let cargo = 0;
+      if (registroAlquiler?.Fecha_entrega && registroAlquiler?.Fecha_entrego) {
+        const fechaEntrega = dayjs(registroAlquiler.Fecha_entrega);
+        const fechaEntregado = dayjs(registroAlquiler.Fecha_entrego);
+        const diferenciaDias = fechaEntregado.diff(fechaEntrega, 'day');
+  
+        if (diferenciaDias > 30) {
+          cargo = 100;
+        } else if (diferenciaDias > 20) {
+          cargo = 50;
+        } else if (diferenciaDias > 10) {
+          cargo = 20;
+        }
+      }
+  
+      return {
+        ...libro,
+        Fecha_alquiler: registroAlquiler?.Fecha_alquiler || 'N/A',
+        Fecha_entrega: registroAlquiler?.Fecha_entrega || 'N/A',
+        Fecha_entregado: registroAlquiler?.Fecha_entrego || 'N/A',
+        Cargo: cargo, 
+      };
+    });
+  
       const librosEnEspera = libros
       .filter((libro) => libro.Espera === true)
       .map((libro) => libro.Nombre_libro);
-
-      const librosAlquilados = libros.filter((libro) => libro.Estado === 2);
 
       
   return (
@@ -73,21 +110,27 @@ export default function InfoUser() {
 
             <div>
             <h3 className="text-success">📖 Libros alquilados:</h3>
-            {librosAlquilados.length > 0 ? (
+            {librosConFechas.length > 0 ? (
           <ul className="list-group list-group-flush">
-                {librosAlquilados.map((libro, index) => (
+                {librosConFechas.map((libro, index) => (
                     <li key={index} className="list-group-item">
+                    <p>
                      <i className="bi bi-check-circle text-success"></i> {libro.Nombre_libro}
+                     </p>
                      <div className="mt-2">
-                      <small className="text-muted">
-                      <strong>Fecha de alquiler:</strong>{''}
-                      {new Date(libro.Fecha_modifica_estado).toLocaleDateString()}
-                      </small>
-                      <br/>
-                      <small className='text-muted'>
-                      <strong>Fecha de entrega:</strong>{''}
-                      {new Date(libro.Fecha_entrega).toLocaleDateString()}
-                      </small>
+                     <p className="text-muted">
+                    <strong>Fecha de alquiler:</strong> {libro.Fecha_alquiler}
+                    </p>
+                    <p className="text-muted">
+                    <strong>Fecha de entrega:</strong> {libro.Fecha_entrega}
+                    </p>
+                    <p className="text-muted">
+                    <strong>Fecha entregado:</strong> {libro.Fecha_entregado}
+                    </p>
+                    <p className={`text-${libro.Cargo > 0 ? 'danger' : 'success'}`}>
+                  <strong>Cargo:</strong> ${libro.Cargo}
+                </p>
+                      
                      </div>
                       </li>
                 ))}
