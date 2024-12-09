@@ -1,3 +1,4 @@
+import Buscador from "@/components/buscador/Search";
 import Nav from "@/components/navegación/Nav";
 import ProviderAlqu from "@/context/ProviderAlqu";
 
@@ -11,8 +12,9 @@ export default function LayoutCarrito({
     <main>
       <ProviderAlqu>
       <Nav></Nav>
+      <Buscador />
       {children}  
-      </ProviderAlqu>  
+      </ProviderAlqu>
     </main>
   );
 }

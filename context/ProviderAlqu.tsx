@@ -1,8 +1,19 @@
 'use client'
 import { Libros, Alquiler, Espera } from '@/models/libros'; 
-import React, { ReactNode, useContext, useState } from 'react'
+import React, { ReactNode, useContext, useState, createContext } from 'react'
 import { ContextAlqu } from './ContextAlqu';
 import { getLibros, updateEspera, updateEstado } from '@/services/services';
+
+
+interface ContextAlqType {
+    libros: Libros[];
+    setLibros: React.Dispatch<React.SetStateAction<Libros[]>>;
+  }
+
+  export const ContextAlq = createContext<ContextAlqType>({
+    libros: [],
+    setLibros: () => {},
+  });
 
 interface VistaComponente{
     children: ReactNode
@@ -10,10 +21,10 @@ interface VistaComponente{
 
 export default function ProviderAlqu({children}: VistaComponente) {
     const [libros, setLibros] = useState<Libros[]>([]);
+    const [librosFiltrados, setLibrosFiltrados] = useState<Libros[]>([]);
     const [alquiler, setAlquiler] = useState<Alquiler[]>([]);
     const [espera, setEspera] = useState<Espera[]>([]);
     const [cargo, setCargo] = useState(0);
-
     
     async function setLibroAlqu(id: number) {
         const estado= 2
@@ -51,7 +62,7 @@ export default function ProviderAlqu({children}: VistaComponente) {
 
 
   return (
-   <ContextAlqu.Provider value={{libros, setLibros, alquiler, setAlquiler, espera, setEspera, setLibroAlqu, setLibroEspera, setLibroDisp, setCargo, cargo }}>
+   <ContextAlqu.Provider value={{libros, setLibros, librosFiltrados, setLibrosFiltrados, alquiler, setAlquiler, espera, setEspera, setLibroAlqu, setLibroEspera, setLibroDisp, setCargo, cargo }}>
 
     {children}
 

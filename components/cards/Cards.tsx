@@ -1,24 +1,50 @@
 'use client'
 import { useContextAlq } from '@/context/ProviderAlqu'
 import { getLibros } from '@/services/services'
-import React, { useEffect, useState } from 'react'
+import React, { forwardRef, useEffect, useState } from 'react'
 import BtnAlquilar from '../botones/BtnAlquilar';
 import BtnReservar from '../botones/BtnReservar';
+import { Libros } from '@/models/libros';
+
 
 interface CardsProps {
   filtroEstado?: 'disponible' | 'alquilado' | 'todos';
+  libroSeleccionado?: Libros | null;
+
 }
 
-export default function Cards({filtroEstado = 'todos'}: CardsProps) {
+
+export default function Cards({filtroEstado = 'todos', libroSeleccionado = null}: CardsProps) {
   const {libros, setLibros}= useContextAlq();
-  const [librosFiltrados, setLibrosFiltrados] = useState(libros);
+  const [librosFiltrados, setLibrosFiltrados] = useState<Libros[]>(libros);
   const [mensaje, setMensajes] = useState<Record<number, string | null>>({});
   const [enEspera, setEnEspera] = useState<number[]>([]);
 
+  useEffect(() => {
+    console.log('Libros totales:', libros.length);
+    console.log('Libro seleccionado:', libroSeleccionado);
+  }, [libros, libroSeleccionado]);
 
   useEffect(()=>{
     obtenerLibros();
   }, []);
+
+  useEffect(() =>{
+   
+    if (libroSeleccionado) {
+      console.log('Filtrando libro seleccionado:', libroSeleccionado);
+      setLibrosFiltrados([libroSeleccionado]);
+    } else {
+    
+      if (filtroEstado === 'todos'){
+        setLibrosFiltrados(libros);
+      } else {
+        const estadoNumerico = filtroEstado === 'disponible' ? 1 : 2;
+        setLibrosFiltrados(libros.filter((libro) => libro.Estado === estadoNumerico));
+      }
+    }
+  }, [libros, filtroEstado, libroSeleccionado]);
+
 
   useEffect(() =>{
     if (filtroEstado === 'todos'){
@@ -52,6 +78,7 @@ export default function Cards({filtroEstado = 'todos'}: CardsProps) {
     setEnEspera((prev) => [...prev, idLibro]);
   }
 };
+
 
   return (
     <div className="container">
@@ -99,7 +126,7 @@ export default function Cards({filtroEstado = 'todos'}: CardsProps) {
                                 >
                                   {libro.Espera === true && libro.Estado=== 2 ? 'En espera' : ''}
                                 </p>
-
+                                
 
                                 <div className="mt-auto d-flex flex-column align-items-center">
                                 {mensaje[libro.Id_libro] && (
