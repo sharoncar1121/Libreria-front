@@ -1,22 +1,25 @@
 
 'use client'
 import { useState } from 'react';
-import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [autenticado, setAutenticado] = useState(false);
-  const [error, setError] = useState('');
 
+  const [error, setError] = useState('');
+  const router = useRouter();
   const user = 'admin';
   const pass = 'admin123';
 
-  const handleLogin = (e:any) => {
+
+  const handleLogin = (e: any) => {
+
     e.preventDefault();
     if (username === user && password === pass) {
-      setAutenticado(true);
+      router.push('/libros-disp');
+      setError('');
     } else {
       setError('Usuario o contraseña incorrectos, intenta de nuevo');
     }
@@ -24,6 +27,7 @@ export default function Login() {
 
   return (
     <div className="container d-flex align-items-center justify-content-center min-vh-100">
+
       <div className="card p-4" style={{ width: '100%', maxWidth: '400px' }}>
         <h2 className="text-center mb-4">Iniciar Sesión</h2>
         <form onSubmit={handleLogin}>
@@ -50,17 +54,13 @@ export default function Login() {
             />
           </div>
           {error && <div className="alert alert-danger">{error}</div>}
-          <button type="submit" className="btn btn-primary w-100">Ingresar</button>
+          <button type="submit" className="btn btn-primary w-100">
+            Ingresar
+          </button>
         </form>
-
-        {autenticado && (
-          <Link href="/libros-disp">
-            credenciales validas!! Click aquí para ingresar
-          </Link>
-        )}
       </div>
-    </div>
-  );
+    </div>
+  );
 };
 
 
