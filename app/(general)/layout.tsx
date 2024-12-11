@@ -12,7 +12,7 @@ export default function LayoutCarrito({
     <main>
       <ProviderAlqu>
       <Nav></Nav>
-      <Buscador />
+      <Buscador/>
       {children}  
       </ProviderAlqu>
     </main>

@@ -2,6 +2,13 @@
 import { Libros } from "@/models/libros";
 import axios from "axios";
 
+
+
+export const api = axios.create({
+    baseURL: 'http://localhost:5000', 
+  });
+
+
 export const getLibros= async() =>{
     const response = await axios.get('http://localhost:5000/libros')
     return response.data
@@ -70,4 +77,6 @@ export const getEsperaList= async() =>{
     const response = await axios.get('http://localhost:5000/espera')
     return response.data
 }
+
+
 
